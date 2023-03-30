@@ -3,11 +3,11 @@ import 'package:movies_club/common/res/colors.dart';
 
 class ActionButton extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const ActionButton({
     required this.title,
-    required this.onTap,
+    this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -22,13 +22,13 @@ class ActionButton extends StatelessWidget {
           height: 48,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(32),
-            color: ResColors.white,
+            color: onTap != null ? ResColors.white : ResColors.grayLight,
           ),
           child: Center(
             child: Text(
               title,
               style: TextStyle(
-                color: ResColors.black,
+                color: onTap != null ? ResColors.black : ResColors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),

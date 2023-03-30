@@ -29,7 +29,7 @@ class _AuthPageState extends State<AuthPage> {
   final _loginFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
 
-  late final _authForm = FormGroup({
+  late final _authFormGroup = FormGroup({
     'login': _loginController,
     'password': _passwordController,
   });
@@ -44,31 +44,40 @@ class _AuthPageState extends State<AuthPage> {
       child: Scaffold(
         backgroundColor: ResColors.black,
         body: SafeArea(
-          child: Column(
-            children: [
-              const Spacer(),
-              const Center(
-                child: AppTitle(),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: AuthInputForm(
-                  loginController: _loginController,
-                  passwordController: _passwordController,
-                  loginFocusNode: _loginFocusNode,
-                  passwordFocusNode: _passwordFocusNode,
+          child: ReactiveForm(
+            formGroup: _authFormGroup,
+            child: Column(
+              children: [
+                const Spacer(),
+                const Center(
+                  child: AppTitle(),
                 ),
-              ),
-              const Spacer(),
-              ActionButton(
-                title: 'Войти',
-                onTap: (){
-                  // TODO
-                },
-              ),
-              const SizedBox(height: 32),
-            ],
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: AuthInputForm(
+                    loginController: _loginController,
+                    passwordController: _passwordController,
+                    loginFocusNode: _loginFocusNode,
+                    passwordFocusNode: _passwordFocusNode,
+                  ),
+                ),
+                const Spacer(),
+                ReactiveFormConsumer(
+                  builder: (context, form, widget) {
+                    return ActionButton(
+                      title: 'Войти',
+                      onTap: form.valid
+                          ? () {
+                              // TODO
+                            }
+                          : null,
+                    );
+                  },
+                ),
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
         ),
       ),
