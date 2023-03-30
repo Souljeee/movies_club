@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_club/common/res/colors.dart';
 import 'package:movies_club/common/res/fonts_family.dart';
+import 'package:movies_club/common/ui/widgets/action_button.dart';
+import 'package:movies_club/common/ui/widgets/app_title.dart';
 import 'package:movies_club/features/auth/ui/widgets/auth_input_form.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -45,16 +47,8 @@ class _AuthPageState extends State<AuthPage> {
           child: Column(
             children: [
               const Spacer(),
-              Center(
-                child: Text(
-                  'Movie Club',
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontFamily: FontsFamily.playfair.name,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
-                ),
+              const Center(
+                child: AppTitle(),
               ),
               const Spacer(),
               Padding(
@@ -67,31 +61,11 @@ class _AuthPageState extends State<AuthPage> {
                 ),
               ),
               const Spacer(),
-              GestureDetector(
+              ActionButton(
+                title: 'Войти',
                 onTap: (){
                   // TODO
                 },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 96),
-                  child: Container(
-                    width: double.infinity,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: ResColors.white,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Войти',
-                        style: TextStyle(
-                          color: ResColors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
               const SizedBox(height: 32),
             ],
